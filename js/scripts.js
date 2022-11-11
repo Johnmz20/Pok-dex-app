@@ -9,3 +9,11 @@ let pokemonList = [
     { name: 'Wartortle', height: 1, type: 'Water'},
     { name: 'Blastoise', height: 1.6, type: 'Water'}
 ];
+//for loop says if the pokemon is bigger than 1 meter it prints out "wow that is big!"
+
+for (let i= 0; i< pokemonList.length; i++) {
+    if(pokemonList[i].height >= 1) {
+        document.write(pokemonList[i].name + ' (height: ' + pokemonList[i].height + ')' + ' wow, that is big!<br>')
+    }
+    else{ document.write(pokemonList[i].name + ' (height: ' + pokemonList[i].height + ')<br>')}
+}
