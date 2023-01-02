@@ -1,15 +1,7 @@
 let pokemonRespository = (function () {
-    let pokemonList = [
-        { ID: "1", name: "Bulbasaur", height: 0.7, type: ["Grass", "Poison"] },
-        { ID: "2", name: "Ivysaur", height: 1, type: ["Grass", "Poison"] },
-        { ID: "3", name: "Venusaur", height: 2, type: ["Grass", "Poison"] },
-        { ID: "4", name: "Charmander", height: 0.6, type: "Fire" },
-        { ID: "5", name: "Charmeleon", height: 1.1, type: "Fire" },
-        { ID: "6", name: "Charizard", height: 1.7, type: ["Fire", "Flying"] },
-        { ID: "7", name: "Squirtle", height: 0.5, type: "Water" },
-        { ID: "8", name: "Wartortle", height: 1, type: "Water" },
-        { ID: "9", name: "Blastoise", height: 1.6, type: "Water" },
-    ];
+    let pokemonList = [];
+    let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
+
     let addPokemonEventListener = function (element, pokemon) {
         element.addEventListener("click", () => showDetails(pokemon));
     };
@@ -30,19 +22,50 @@ let pokemonRespository = (function () {
         addPokemonEventListener(button, pokemon);
     }
     function showDetails(pokemon) {
-        console.log(pokemon.name);
+        loadDetails(pokemon).then(function(){
+            console.log(pokemon);
+        });
+    }
+    function loadList() {
+        return fetch(apiUrl).then(function (response) {
+            return response.json();            
+        }) .then (function (json){
+            json.results.forEach(function(item){
+                let pokemon = {
+                    name: item.name,
+                    detailsUrl: item.url
+                };
+                add(pokemon);
+            });
+        }).catch(function (e) {
+            console.error(e);
+        })
+    }
+
+    function loadDetails(item) {
+        let url = item.detailsUrl;
+        return fetch(url).then(function (response){
+            return response.json();
+        }).then(function (details) {
+            // details to the pokemon
+            item.imageUrl = details.sprites.front_default;
+            item.height = details.height;
+            item.types = details.types;
+        }).catch(function(e){
+            console.error(e);
+        });
     }
     return {
         add: add,
         getAll: getAll,
         addListItem: addListItem,
-        showDetails: showDetails,
+        loadList: loadList,
+        loadDetails: loadDetails,
     };
 })();
-console.log(pokemonRespository.getAll());
+    pokemonRespository.loadList().then(function(){
+        pokemonRespository.getAll().forEach(function(pokemon){
+            pokemonRespository.addListItem(pokemon);
+        });
+    });
 
-pokemonRespository.add({ ID: "10", name: "Caterpie", height: 1, type: "grass" });
-
-pokemonRespository.getAll().forEach(function (pokemon) {
-    pokemonRespository.addListItem(pokemon);
-});
