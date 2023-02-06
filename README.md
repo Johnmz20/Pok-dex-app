@@ -1,19 +1,28 @@
-A Pokedex app that displays 151 pokemon entries.
+# Pokêdex app
+## About:
+The Application is a pokédex of the Kanto region that holds 150 different Pokémon species with different types, abilities, and evolutions. I used API to get the information and put it into buttons when clicking on a specific pokemon a modal will appear with the basic knowledge of the pokemon. This project was fun to create since im a Pokémon fan, I hope I will create another application of the Unova region as this is my favorite pokemon generation.
 
-Required:
-● The app must load data from an external API; for instance, the Pokémon API.
-● The app must display a list of items loaded from that API after the page is loaded.
-● The app must enable the viewing of more details for a given list item (like a Pokémon) on
-demand, such as when clicking on a list item.
-● The app must have CSS styling.
-● The JavaScript code must be formatted according to ESLint rules.
-○ The JavaScript code may be formatted via Prettier.
-○ The JavaScript code may be manually formatted.
-● The app must use at least one additional complex UI pattern, such as a modal, for details or
-touch interactions.
-○ The app may allow searching for items (e.g., searching for Pokémon).
-● The app must not throw any errors when being used.
-● The app should be deployed to a publicly accessible platform like GitHub Pages (you can
-review how to do this in Intro to Frontend Development's Exercise 10: Code Quality, Testing, &
-Web Hosting).
-● The app must work in Chrome, Firefox, Safari, Edge, and Internet Explorer 11.
+## Languages used
+- Html
+- JavaScript
+- CSS
+
+## FrameWorks
+- [Bootstraps](https://getbootstrap.com/)
+- [jquey](https://jquery.com)
+
+## API
+[Kanto API](https://pokeapi.co/api/v2/pokemon/?limit=150)
+
+## Dependecies
+Polyfills:
+- [Promise](https://raw.githubusercontent.com/taylorhakes/promise-polyfill/master/dist/polyfill.min.js)
+- [Fetch](https://github.com/github/fetch)
+
+## Extensions
+- [ESLint](https://eslint.org/)
+- [Prettier](https://prettier.io/)
+- [Live Server](https://github.com/ritwickdey/vscode-live-server-plus-plus)
+
+## link
+here is the link to my [Application](https://johnmz20.github.io/Pok-dex-app/) hope you enjoy!
