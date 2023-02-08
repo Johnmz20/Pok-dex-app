@@ -1,7 +1,7 @@
 let pokemonRespository = (function () {
     let pokemonList = [];
-    let apiUrl = "https://pokeapi.co/api/v2/pokemon/?limit=150";
-    let pokemonListEl = $(".pokemon-list");
+    let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
+    let pokemonListEl = $('.pokemon-list');
 
     function add(pokemon) {
         pokemonList.push(pokemon);
@@ -15,7 +15,7 @@ let pokemonRespository = (function () {
         let button = $('<button class = "pokemon-button btn btn-warning" data-target="#pokemon-modal" data-toggle="modal">' + pokemon.name + "</button>");
         listItem.append(button);
         pokemonListEl.append(listItem);
-        button.on("click", function () {
+        button.on('click', function () {
             showDetails(pokemon);
         });
     }
@@ -62,20 +62,32 @@ let pokemonRespository = (function () {
         });
     }
     function showDetailsModal(pokemon) {
-        let modalBody = $(".modal-body");
-        let modalTitle = $(".modal-title");
+        let modalBody = $('.modal-body');
+        let modalTitle = $('.modal-title');
         modalBody.empty();
         modalTitle.text(pokemon.name);
-        let height = $("<p>" + "Height: " + pokemon.height + "</p>");
+        let height = $('<p>' + 'Height: ' + pokemon.height + '</p>');
         let image = $('<img class = "pokemon-img" src = " ' + pokemon.imageUrl + '" />');
-        let types = $("<p>" + "Types: " + pokemon.types + "</p>");
-        let abilities = $("<p>" + "abilities: " + pokemon.abilities + "</p>");
+        let types = $('<p>' + 'Types: ' + pokemon.types + '</p>');
+        let abilities = $('<p>' + 'abilities: ' + pokemon.abilities + '</p>');
         modalBody.append(image);
         modalBody.append(height);
         modalBody.append(types);
         modalBody.append(abilities);
     }
 
+    document.getElementById('search-value').addEventListener('input', (e) => {
+        let buttons = document.querySelectorAll('.pokemon-button'),
+            searchTerm = e.target.value;
+
+        for (let i = 0; i < buttons.length; i++) {
+            if (buttons[i].innerText.includes(searchTerm)) {
+                buttons[i].parentNode.setAttribute('style', 'display:inline');
+            } else {
+                buttons[i].parentNode.setAttribute('style', 'display:none');
+            }
+        }
+    });
     return {
         getAll: getAll,
         add: add,
